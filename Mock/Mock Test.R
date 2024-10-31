@@ -125,3 +125,34 @@ library(ggplot2)
 ggplot(cleaned_data, aes(x = Date, y = Cases)) +
   geom_line(color = "blue") +
   labs(title = "COVID-19 Cases Over Time", x = "Date", y = "Number of Cases")
+
+#Additional Layer
+ggplot(cleaned_data, aes(x = Date, y = Cases, color = Country)) +
+  geom_line() +
+  geom_point() +  # Adding points on top of the line
+  labs(
+    title = "COVID-19 Cases Over Time with Data Points",
+    x = "Date",
+    y = "Number of Cases"
+  )
+
+#Small Multiples
+ggplot(cleaned_data, aes(x = Date, y = Cases)) +
+  geom_line() +
+  facet_wrap(~ Country, scales = "free_y") +  # Create a panel for each country
+  labs(
+    title = "COVID-19 Cases Over Time by Country",
+    x = "Date",
+    y = "Number of Cases"
+  )
+
+
+# Open a PDF device to save the plot
+pdf("my_plot.pdf", width = 8, height = 6)  # Adjust width and height as needed
+
+# Close the PDF device to save the plot
+dev.off()
+
+ggsave('plot.pdf')
+
+
